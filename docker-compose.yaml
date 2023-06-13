@@ -1,12 +1,17 @@
 version: '3'
 services:
-   apisix:
+  apisix:
     image: apache/apisix
     ports:
       - 9080:9080
-    environment:
-      - ALLOW_NONE_AUTHENTICATION=yes
-      - APISIX_STAND_ALONE=true
+    entrypoint: ["sh","-c"]
+    command: ["/usr/bin/apisix init && exec /usr/local/openresty/bin/openresty -p /usr/local/apisix -g 'daemon off;'"]
     volumes:
-      - ./apisix/conf/apisix.yaml:/usr/local/apisix/conf/apisix.yaml
       - ./apisix/conf/config.yaml:/usr/local/apisix/conf/config.yaml
+      - ./apisix/conf/apisix.yaml:/usr/local/apisix/conf/apisix.yaml
+  httpbin:
+    image: kennethreitz/httpbin
+    ports:
+      - 8080:80
+
+

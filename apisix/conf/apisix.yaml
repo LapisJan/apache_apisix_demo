@@ -4,15 +4,14 @@ routes:
     uri: /*
     upstream:
       nodes:
-        "httpbin.org": 1
+        "httpbin": 1
       type: roundrobin
-    plugin_config_id: 1
   -
     id: httpbin
     uri: /lapis
     upstream:
       nodes:
-        "httpbin.org": 1
+        "httpbin": 1
       type: roundrobin
     plugin_config_id: 2
 
